@@ -1,0 +1,9 @@
+{
+  "name": "expense-desk-design-tools",
+  "private": true,
+  "description": "Expands Adaptive Card templates with Microsoft's templating SDK for render_card.py",
+  "dependencies": {
+    "adaptive-expressions": "4.23.3",
+    "adaptivecards-templating": "2.3.1"
+  }
+}

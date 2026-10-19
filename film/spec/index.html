@@ -1,0 +1,384 @@
+<title>Approvals That Learn</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Layout: a single reading column; the storyboard breaks wider with frame + notes side by side. */
+  :root {
+    --bg: #f5f6f8; --surface: #ffffff; --sunken: #eef0f3; --line: #e5e7eb;
+    --ink: #16171a; --ink-2: #474a52; --ink-3: #676a72;
+    --accent: #0f6cbd; --accent-wash: #ebf3fc;
+    --wait: #9a5400; --wait-wash: #fbf1e1;
+    --ok: #17784a; --ok-wash: #e7f3ec;
+    --learn: #0b6a80; --learn-wash: #e6f3f5;
+    --teams: #5b5fc7;
+    --sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #111316; --surface: #191c20; --sunken: #22262b; --line: #2c3036;
+    --ink: #ecedef; --ink-2: #b6b9c0; --ink-3: #8e9198;
+    --accent: #5aa9f0; --accent-wash: #16283a;
+    --wait: #e2a453; --wait-wash: #33260f;
+    --ok: #5cc48a; --ok-wash: #12301f;
+    --learn: #4ec3d6; --learn-wash: #10303a;
+    --teams: #9a9df2; color-scheme: dark } }
+  :root[data-theme="dark"] {
+    --bg: #111316; --surface: #191c20; --sunken: #22262b; --line: #2c3036;
+    --ink: #ecedef; --ink-2: #b6b9c0; --ink-3: #8e9198;
+    --accent: #5aa9f0; --accent-wash: #16283a;
+    --wait: #e2a453; --wait-wash: #33260f;
+    --ok: #5cc48a; --ok-wash: #12301f;
+    --learn: #4ec3d6; --learn-wash: #10303a;
+    --teams: #9a9df2; color-scheme: dark }
+
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font: 15px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-block: 48px 96px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+  h1 { font: 600 clamp(34px, 6vw, 52px)/1.05 var(--sans); letter-spacing: -.02em; }
+  h2 { font: 600 22px/1.25 var(--sans); letter-spacing: -.01em; }
+  h3 { font: 600 17px/1.3 var(--sans); }
+  p { margin: 0; }
+  .label { font-size: 12px; font-weight: 500; color: var(--ink-3); }
+  .mono { font-family: var(--mono); font-size: 12.5px; }
+  .muted { color: var(--ink-3); }
+  a { color: var(--accent); }
+  section { margin-top: 56px; display: grid; gap: 18px; }
+  .section-head { display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .section-head p { color: var(--ink-2); max-width: 68ch; }
+
+  /* header */
+  .lede { margin-top: 14px; font-size: 18px; color: var(--ink-2); max-width: 62ch; }
+  .meta { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .meta div { background: var(--surface); padding: 12px 14px; display: grid; gap: 2px; }
+  .meta b { font-weight: 600; }
+
+  /* decisions */
+  .decisions { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: q; }
+  .decisions li { counter-increment: q; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px 14px 52px; position: relative; display: grid; gap: 4px; }
+  .decisions li::before { content: "Q" counter(q); position: absolute; left: 14px; top: 14px; font: 500 12px var(--mono); color: var(--accent); background: var(--accent-wash); border-radius: 6px; padding: 1px 6px; }
+  .decisions .default { font-size: 13px; color: var(--ink-3); }
+
+  /* the idea */
+  .idea { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 18px; }
+  .idea .thesis { font: 400 clamp(22px, 3.2vw, 30px)/1.25 var(--serif); max-width: 34ch; }
+  .three { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .three div { display: grid; gap: 6px; align-content: start; }
+  .three h3 { font-size: 15px; }
+  .three p { color: var(--ink-2); font-size: 14px; }
+
+  /* runtime bar, drawn to scale: one fr per second */
+  .runtime { overflow-x: auto; }
+  .bar-wrap { min-width: 640px; display: grid; gap: 6px; }
+  .bar, .lane { display: grid; grid-template-columns: 8fr 12fr 10fr 14fr 12fr 10fr 10fr; gap: 3px; }
+  .bar span { height: 44px; border-radius: 6px; padding: 6px 8px; font-size: 12px; font-weight: 600; color: #fff; display: flex; align-items: flex-end; overflow: hidden; white-space: nowrap; }
+  .m1 { background: var(--accent); } .m2 { background: var(--wait); } .m3 { background: var(--learn); } .mc { background: var(--ink-3); }
+  .lane span { font-size: 11.5px; color: var(--ink-2); padding: 0 2px; line-height: 1.35; }
+  .ticks { display: grid; grid-template-columns: repeat(76, 1fr); font: 11px var(--mono); color: var(--ink-3); }
+  .ticks span { grid-column: span 10; border-left: 1px solid var(--line); padding-left: 3px; }
+  .ticks span:last-child { grid-column: span 6; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--ink-2); }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+  /* storyboard */
+  .beats { display: grid; gap: 16px; }
+  .beat { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .frame { margin: 0; aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; background: var(--sunken); border: 1px solid var(--line); position: relative; max-width: 100%; }
+  .frame img { width: 100%; height: 100%; object-fit: cover; object-position: top left; display: block; }
+  .frame img.card { object-fit: contain; padding: 18px; background: #f5f5f5; }
+  .frame figcaption { position: absolute; left: 8px; bottom: 8px; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 5px; background: rgb(0 0 0 / .62); color: #fff; }
+  .beat-body { display: grid; gap: 10px; align-content: start; min-width: 0; }
+  .beat-meta { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; font: 12px var(--mono); color: var(--ink-3); }
+  .mv { font: 600 11.5px var(--sans); padding: 1px 7px; border-radius: 999px; }
+  .mv.m1 { color: var(--accent); background: var(--accent-wash); } .mv.m2 { color: var(--wait); background: var(--wait-wash); }
+  .mv.m3 { color: var(--learn); background: var(--learn-wash); } .mv.mc { color: var(--ink-2); background: var(--sunken); }
+  .beat p.pic { color: var(--ink-2); font-size: 14px; }
+  .onscreen { border-left: 3px solid var(--line); padding: 2px 0 2px 12px; font: 600 19px/1.25 var(--sans); letter-spacing: -.01em; }
+  .onscreen span { display: block; color: var(--ink-3); }
+  .cues { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 4px 10px; margin: 0; font-size: 13.5px; }
+  .cues dt { color: var(--ink-3); font-weight: 500; }
+  .cues dd { margin: 0; color: var(--ink-2); }
+  .src { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 0 6px; border-radius: 4px; margin-right: 4px; }
+  .src.real { color: var(--ok); background: var(--ok-wash); } .src.drawn { color: var(--teams); background: var(--sunken); } .src.needs { color: var(--wait); background: var(--wait-wash); }
+
+  /* storyboard sketches drawn in HTML */
+  .sketch { position: absolute; inset: 0; display: grid; place-items: center; padding: 18px; background: var(--sunken); }
+  .chat { width: min(100%, 420px); display: grid; gap: 10px; font-family: "Segoe UI", system-ui, sans-serif; }
+  .bubble { justify-self: end; background: #e8ebfa; color: #242424; border-radius: 8px; padding: 8px 11px; font-size: 13px; max-width: 88%; }
+  .chat img { width: 100%; border-radius: 6px; border: 1px solid #e1dfdd; }
+  .ledger { width: min(100%, 440px); display: grid; gap: 12px; }
+  .stamps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; position: relative; padding-top: 22px; }
+  .stamps::before { content: "learned limit £350"; position: absolute; top: 0; left: 0; right: 0; border-bottom: 1.5px dashed var(--learn); font: 600 11px var(--sans); color: var(--learn); padding-bottom: 2px; }
+  .stamp { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px; display: grid; gap: 2px; font-size: 12px; }
+  .stamp b { font: 600 15px var(--sans); font-variant-numeric: tabular-nums; }
+  .stamp em { font-style: normal; color: var(--ok); font-weight: 600; font-size: 11px; }
+  .rule { font: 400 19px/1.2 var(--serif); color: var(--ink); text-align: center; }
+  .endcard { display: grid; gap: 10px; text-align: center; }
+  .endcard b { font: 600 clamp(20px, 3vw, 26px)/1.15 var(--sans); letter-spacing: -.01em; }
+  .stack { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .stack span { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); }
+
+  /* tables */
+  .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; font-weight: 500; color: var(--ink-3); background: var(--sunken); }
+  tr:last-child td { border-bottom: 0; }
+  td.before { color: var(--ink-3); }
+  td.after { font-weight: 600; }
+
+  /* look & sound */
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+  .panel ul { margin: 0; padding-left: 18px; color: var(--ink-2); font-size: 14px; display: grid; gap: 4px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags span { font-size: 13px; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line); }
+  .tags.yes span { background: var(--ok-wash); border-color: transparent; color: var(--ok); }
+  .tags.no span { color: var(--ink-3); text-decoration: line-through; text-decoration-color: var(--ink-3); }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; }
+  .sw { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 12px; }
+  .sw i { display: block; height: 34px; }
+  .sw div { padding: 6px 8px; display: grid; }
+  .sw code { font: 11px var(--mono); color: var(--ink-3); }
+  .motif { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .motif div { border: 1px solid var(--line); border-radius: 8px; padding: 10px; display: grid; gap: 2px; font-size: 13px; color: var(--ink-2); }
+  .motif b { font-size: 13px; color: var(--ink); }
+
+  .sched { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; border-left: 2px solid var(--line); margin-left: 6px; }
+  .sched li { position: relative; padding: 0 0 16px 20px; display: grid; gap: 2px; }
+  .sched li::before { content: ""; position: absolute; left: -7px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); }
+  .sched b { font: 500 12.5px var(--mono); color: var(--accent); }
+  .sched span { color: var(--ink-2); font-size: 14px; }
+  footer { margin-top: 56px; color: var(--ink-3); font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 16px; }
+
+  @media (max-width: 760px) {
+    .beat { grid-template-columns: 1fr; }
+    .motif { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <div class="label">Microsoft demo · launch film spec · gates 1 and 2</div>
+  <h1 style="margin-top:10px">Approvals That Learn</h1>
+  <p class="lede">A 76-second film of the Expense Desk demo for the Microsoft team: an employee asks in Teams, the agent works in front of Finance, a manager approves, and after a few approvals the agent approves the next one itself and says why.</p>
+  <div class="meta">
+    <div><span class="label">For</span><b>Sofía → Microsoft partner team</b></div>
+    <div><span class="label">Due</span><b>Mon 19 Oct, end of day PT</b></div>
+    <div><span class="label">Formats</span><b>16:9 4K master · 1080p share copy under 10 MB</b></div>
+    <div><span class="label">Status</span><b>Waiting on Q1–Q6 below</b></div>
+  </div>
+
+  <section id="decisions">
+    <div class="section-head"><h2>Decisions needed by Monday 10:00 PT</h2><p>Each one has the default we'll go with if there's no answer in time, so the film still ships Monday.</p></div>
+    <ol class="decisions">
+      <li><b>Is a film the right Monday deliverable for Microsoft, or do they also need to try it?</b><span class="default">Default: the film, plus a hosted test link. Deployment prep is under way: a demo mode can go up today, and a live mode once the .NET agent runs.</span></li>
+      <li><b>Is OpenAI OK as the model until the Azure credentials arrive?</b> The .NET agent now runs end to end against a new Intelligence project: request, policy check, approval, Finance's edit, the manager's approval and the reply. OpenAI stands in for Azure OpenAI until we have Azure credentials.<span class="default">Default: switch to Azure OpenAI as soon as the credentials arrive.</span></li>
+      <li><b>Is the Microsoft 365 tenant ready (custom app upload, an employee and a manager test user)?</b><span class="default">Default: if not, the Teams scenes show our real Adaptive Cards rendered with Microsoft's Adaptive Cards SDK, in a plain chat frame, labelled as a recreation in the note.</span></li>
+      <li><b>Can we get into the Intelligence project with Automatic Learning on, to film the learned rule there?</b><span class="default">Default: the payoff uses the learned-rule card in Expense Desk only.</span></li>
+      <li><b>Does the direction below work?</b> It has its own score and pacing, built for this demo rather than reusing the Open Intelligent UI film's style. If there's a film whose sound you love, send it and we'll measure it.<span class="default">Default: this direction, with three music takes for you to pick from Monday at 14:00 PT.</span></li>
+      <li><b>End card branding?</b><span class="default">Default: CopilotKit-led end card with a plain-text stack line (Microsoft Agent Framework, Azure OpenAI, Microsoft Teams, AG-UI, CopilotKit) and no Microsoft logo, unless their team sends co-branding rules. CTA link to be confirmed.</span></li>
+    </ol>
+  </section>
+
+  <section id="idea">
+    <div class="section-head"><h2>The idea</h2><p>One idea runs the picture, the music and the pacing.</p></div>
+    <div class="idea">
+      <p class="thesis">Every request is a question. While the agent waits for a manager, the music waits too. Approval answers it. After it learns, the agent answers on its own.</p>
+      <div class="three">
+        <div><h3>Picture: two screens, one agent</h3><p>Teams on the left, Finance's Expense Desk on the right, on one wide canvas. A thin blue line connects them and a pulse travels along it each time the agent acts. Viewers see cause and effect: a message in Teams, a step in the desk, an edit in the desk, a refreshed card in Teams.</p></div>
+        <div><h3>Music: a question that resolves</h3><p>Our own score. A four-note motif ends unresolved when a request comes in, holds on a suspended chord while the agent waits for the manager, and lands on the home chord when he approves. In the payoff it resolves straight away, with no wait. Nobody has to explain human-in-the-loop or learning; you hear both.</p></div>
+        <div><h3>Pacing: real time, then weeks in seconds</h3><p>Anything a person does plays at real speed: typing, clicking, the edit. The wait for the manager is the longest hold in the film. The learning montage compresses weeks of approvals into four beats. The payoff is fast because the agent no longer has to wait.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="runtime">
+    <div class="section-head"><h2>Runtime</h2><p>Drawn to scale, 76 s at 120 BPM (one bar = 2 s = 60 frames at 30 fps, so every cut lands on a beat).</p></div>
+    <div class="runtime">
+      <div class="bar-wrap" role="img" aria-label="Runtime bar: Ask 0 to 8 seconds, Finance sees every step 8 to 20, Fix a detail 20 to 30, The wait 30 to 44, Four approvals later 44 to 56, Next time 56 to 66, Coda 66 to 76.">
+        <div class="bar"><span class="m1">Ask</span><span class="m1">Every step</span><span class="m1">Fix a detail</span><span class="m2">The wait</span><span class="m3">Four approvals later</span><span class="m3">Next time</span><span class="mc">Coda</span></div>
+        <div class="lane"><span>Silence, keys only; motif enters on the reply</span><span>Pulse on the line each time the agent acts</span><span>Pulse travels back; card refreshes</span><span>Held suspended chord, then a stamp resolves it</span><span>Four stamps, a layer each</span><span>Resolves with no wait, then a beat of silence</span><span>Full chord, ring-out</span></div>
+        <div class="ticks"><span>0:00</span><span>0:10</span><span>0:20</span><span>0:30</span><span>0:40</span><span>0:50</span><span>1:00</span><span>1:10</span></div>
+      </div>
+    </div>
+    <div class="legend"><span><i class="m1"></i>I · Ask (real time)</span><span><i class="m2"></i>II · Wait (the held breath)</span><span><i class="m3"></i>III · Learn (compressed, then instant)</span><span><i class="mc"></i>Coda</span></div>
+  </section>
+
+  <section id="storyboard">
+    <div class="section-head"><h2>Storyboard</h2><p>Frames are real captures of Expense Desk and real renders of our Adaptive Card templates, except where marked as a sketch. Timecodes at 30 fps.</p></div>
+    <div class="beats">
+
+      <article class="beat">
+        <figure class="frame"><div class="sketch"><div class="chat"><div class="bubble">I need to book a hotel in London for the AI Summit, 4 to 7 Nov, around £320 a night.</div><img src="frames/teams-summary-card.jpg" alt="The request summary Adaptive Card the agent replies with"></div></div><figcaption>Sketch · card is a real render</figcaption></figure>
+        <div class="beat-body">
+          <div class="beat-meta"><span class="mv m1">I · Ask</span>0:00–0:08 · f0–239 · bars 1–4</div>
+          <h3>Ask in Teams</h3>
+          <p class="pic">Opens on Teams, centred, in near silence. Amara types her request at a person's pace. The agent replies with the request summary card. The motif enters on the reply.</p>
+          <div class="onscreen">Ask in Teams.</div>
+          <dl class="cues"><dt>Music</dt><dd>Silence until the reply, then the four-note motif, ending unresolved.</dd><dt>Sound</dt><dd>Soft laptop keys (about 10 a second, never one per letter), Enter, a soft paper slide as the card arrives.</dd><dt>Footage</dt><dd><span class="src needs">Q3</span>Captured in the tenant, or drawn from <span class="mono">cards/request-summary.json</span>.</dd></dl>
+        </div>
+      </article>
+
+      <article class="beat">
+        <figure class="frame"><img src="frames/b3-agent-at-work.jpg" alt="Expense Desk while the agent checks policy"><figcaption>Real capture</figcaption></figure>
+        <div class="beat-body">
+          <div class="beat-meta"><span class="mv m1">I · Ask</span>0:08–0:20 · f240–599 · bars 5–10</div>
+          <h3>Finance sees every step</h3>
+          <p class="pic">The camera pulls back so Teams and Expense Desk sit side by side. With each pulse along the line, a step lands in the desk: the request, who Amara reports to, the policy check (£70 a night over the London cap). The approval card goes out to Jonas.</p>
+          <div class="onscreen">Finance sees<span>every step.</span></div>
+          <dl class="cues"><dt>Music</dt><dd>Mallet pulse joins under the motif; one tuned pen tick per step.</dd><dt>Sound</dt><dd>A soft glassy tick for each pulse, panned left to right.</dd><dt>Footage</dt><dd><span class="src real">Real</span>Expense Desk captured at 2×.</dd></dl>
+        </div>
+      </article>
+
+      <article class="beat">
+        <figure class="frame"><img src="frames/b4-finance-edit.jpg" alt="Finance changes the nightly rate and the agent re-checks"><figcaption>Real capture</figcaption></figure>
+        <div class="beat-body">
+          <div class="beat-meta"><span class="mv m1">I · Ask</span>0:20–0:30 · f600–899 · bars 11–15</div>
+          <h3>Fix a detail</h3>
+          <p class="pic">Priya in Finance corrects the rate to £295. "Synced to the agent." The pulse travels back to Teams, and the manager's card updates: Rate, Total and Policy flash as they change.</p>
+          <div class="onscreen">Fix a detail.<span>The agent keeps up.</span></div>
+          <dl class="cues"><dt>Music</dt><dd>Motif repeats a step lower, still unresolved.</dd><dt>Sound</dt><dd>Three keys for "295", Enter, the pulse panned right to left.</dd><dt>Footage</dt><dd><span class="src real">Real</span>Expense Desk; Teams card from the agent's refreshed payload.</dd></dl>
+        </div>
+      </article>
+
+      <article class="beat">
+        <figure class="frame"><img class="card" src="frames/teams-approval-card.jpg" alt="The manager's approval Adaptive Card with Approve and Reject"><figcaption>Real render of our card</figcaption></figure>
+        <div class="beat-body">
+          <div class="beat-meta"><span class="mv m2">II · Wait</span>0:30–0:44 · f900–1319 · bars 16–22</div>
+          <h3>The wait</h3>
+          <p class="pic">Push into Jonas's card in Teams. The agent has stopped and is waiting for him. Hold on the Approve button for a beat longer than is comfortable, then he clicks. Both screens turn green at the same moment, and Amara gets her answer.</p>
+          <div class="onscreen">Managers decide<span>where they already work.</span></div>
+          <dl class="cues"><dt>Music</dt><dd>Everything drops to one held suspended chord. The click is a soft rubber-stamp thud that resolves to the home chord.</dd><dt>Sound</dt><dd>The stamp, tuned to the key. Nothing else.</dd><dt>Footage</dt><dd><span class="src needs">Q3</span>Captured in the tenant, or drawn from <span class="mono">cards/approval-request.json</span>.</dd></dl>
+        </div>
+      </article>
+
+      <article class="beat">
+        <figure class="frame"><div class="sketch"><div class="ledger"><div class="stamps"><div class="stamp"><span class="muted">Jul</span><b>£300</b><em>Approved</em></div><div class="stamp"><span class="muted">Aug</span><b>£350</b><em>Approved</em></div><div class="stamp"><span class="muted">Sep</span><b>£280</b><em>Approved</em></div><div class="stamp"><span class="muted">Today</span><b>£295</b><em>Approved</em></div></div><p class="rule">London hotels are approved up to £350 a night.</p></div></div><figcaption>Sketch · rates from seed data</figcaption></figure>
+        <div class="beat-body">
+          <div class="beat-meta"><span class="mv m3">III · Learn</span>0:44–0:56 · f1320–1679 · bars 23–28</div>
+          <h3>Four approvals later</h3>
+          <p class="pic">A "four approvals later" chip, then weeks in four beats: each London approval stamps onto a ledger strip with its rate. A dashed line draws at £350 across them and the learned rule appears, with the approvals it came from.</p>
+          <div class="onscreen">It learns<span>how your managers decide.</span></div>
+          <dl class="cues"><dt>Music</dt><dd>The motif resolves on each stamp, and each one adds a layer (pizzicato, then piano, then strings).</dd><dt>Sound</dt><dd>Four stamps on the beat.</dd><dt>Footage</dt><dd><span class="src drawn">Drawn</span>from the real approvals in <span class="mono">seed/</span>; rule card <span class="src real">Real</span>.</dd></dl>
+        </div>
+      </article>
+
+      <article class="beat">
+        <figure class="frame"><img src="frames/b7-payoff.jpg" alt="The next request approved under learned rule LR-01"><figcaption>Real capture</figcaption></figure>
+        <div class="beat-body">
+          <div class="beat-meta"><span class="mv m3">III · Learn</span>0:56–1:06 · f1680–1979 · bars 29–33</div>
+          <h3>Next time</h3>
+          <p class="pic">Amara asks again: £335 a night. This time there's no wait. The policy check shows the learned limit, and the agent approves the request itself, citing rule LR-01. Then the same rule in the Intelligence dashboard.</p>
+          <div class="onscreen">Next time,<span>it decides and says why.</span></div>
+          <dl class="cues"><dt>Music</dt><dd>The motif resolves with no hold. One beat of silence, then everything comes in.</dd><dt>Sound</dt><dd>Keys, then a single stamp.</dd><dt>Footage</dt><dd><span class="src real">Real</span>Expense Desk <span class="src needs">Q4</span>Intelligence dashboard.</dd></dl>
+        </div>
+      </article>
+
+      <article class="beat">
+        <figure class="frame"><div class="sketch"><div class="endcard"><b>Build agents that learn.</b><div class="stack"><span>Microsoft Agent Framework</span><span>Azure OpenAI</span><span>Microsoft Teams</span><span>AG-UI</span><span>CopilotKit</span></div><span class="mono muted">CTA link to be confirmed</span></div></div><figcaption>Sketch</figcaption></figure>
+        <div class="beat-body">
+          <div class="beat-meta"><span class="mv mc">Coda</span>1:06–1:16 · f1980–2279 · bars 34–38</div>
+          <h3>The whole flow, then the stack</h3>
+          <p class="pic">Pull back over both screens and the whole conversation, the line between them still. Then the stack line and the call to action.</p>
+          <div class="onscreen">Build agents that learn.</div>
+          <dl class="cues"><dt>Music</dt><dd>Final home chord, ring-out, silent last second.</dd><dt>Sound</dt><dd>Soft air under the pullback.</dd><dt>Footage</dt><dd><span class="src drawn">Drawn</span>end card <span class="src needs">Q6</span>branding.</dd></dl>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="copy">
+    <div class="section-head"><h2>Copy: from the brief to the screen</h2><p>Headlines use the viewer's words. Product and protocol names appear once, in the stack line.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>In the brief</th><th>On screen</th></tr></thead>
+      <tbody>
+        <tr><td class="before">An employee messages the expense bot in Teams</td><td class="after">Ask in Teams.</td></tr>
+        <tr><td class="before">The agent's tool calls stream in as generative UI and the policy checks run step by step</td><td class="after">Finance sees every step.</td></tr>
+        <tr><td class="before">Edits sync straight back to the agent through shared state</td><td class="after">Fix a detail. The agent keeps up.</td></tr>
+        <tr><td class="before">Human in the loop: the agent pauses for manager approval</td><td class="after">Managers decide where they already work.</td></tr>
+        <tr><td class="before">Automatic Learning picks up that London is approved up to £350</td><td class="after">It learns how your managers decide.</td></tr>
+        <tr><td class="before">The agent approves it on its own and cites the learned rule</td><td class="after">Next time, it decides and says why.</td></tr>
+        <tr><td class="before">CopilotKit .NET runtime, Intelligence, SkillRegistryContextProvider</td><td class="after">Build agents that learn. (+ stack line)</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="look">
+    <div class="section-head"><h2>Look and sound</h2><p>The film looks like the product, not a generic launch ad, so a Microsoft viewer sees software they could run.</p></div>
+    <div class="grid2">
+      <div class="panel">
+        <h3>Feels like</h3>
+        <div class="tags yes"><span>a calm finance team on a good day</span><span>cause and effect you can follow</span><span>the pause before a decision</span><span>process music</span><span>at home next to Teams</span></div>
+        <h3 style="margin-top:6px">Not like</h3>
+        <div class="tags no"><span>sci-fi AI glow</span><span>dark thriller score</span><span>upbeat SaaS pop</span><span>3D dashboards flying past</span><span>invented UI</span></div>
+      </div>
+      <div class="panel">
+        <h3>Palette: colour carries the story</h3>
+        <div class="swatches">
+          <div class="sw"><i style="background:#f5f6f8"></i><div>Canvas<code>#F5F6F8</code></div></div>
+          <div class="sw"><i style="background:#0f6cbd"></i><div>The line, live<code>#0F6CBD</code></div></div>
+          <div class="sw"><i style="background:#9a5400"></i><div>Waiting<code>#9A5400</code></div></div>
+          <div class="sw"><i style="background:#17784a"></i><div>Approved<code>#17784A</code></div></div>
+          <div class="sw"><i style="background:linear-gradient(135deg,#0f6cbd,#0e8a8a)"></i><div>Learned<code>#0B6A80</code></div></div>
+          <div class="sw"><i style="background:#5b5fc7"></i><div>Teams, in Teams only<code>#5B5FC7</code></div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Type and motion</h3>
+        <ul>
+          <li>Headlines in the product's own Instrument Sans, 600 weight, two lines, the second line greyed. Instrument Serif appears once: the learned rule.</li>
+          <li>One camera on one wide canvas. Push in to whatever is moving; one pullback at the end. No whips, spins or 3D.</li>
+          <li>The line between the two screens is the only motion graphic. Everything else is the real UI doing its job.</li>
+          <li>Holds: at least 0.3 s per headline word plus 0.6 s. The wait in movement II holds about 2.5 s on Approve.</li>
+          <li>No browser chrome. Teams shows only the chat and the card.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Score: our own, written to the cut</h3>
+        <div class="motif">
+          <div><b>Question</b>Four rising notes on felt piano, ending on the second degree over a suspended chord.</div>
+          <div><b>Wait</b>Pulse drops out; a warm low string pad holds the suspended chord.</div>
+          <div><b>Answer</b>The stamp lands on the downbeat; the phrase resolves home.</div>
+        </div>
+        <ul>
+          <li>120 BPM, bright Lydian colour resolving to major: curious and warm, never cheerful pop or thriller.</li>
+          <li>Marimba and mallets in an interlocking pulse, felt piano, pizzicato strings, a warm string pad. No drum kit, no synth arpeggios, no vocals.</li>
+          <li>Office foley tuned to the key: soft laptop keys, rubber stamps, pen ticks, paper, a glassy pulse along the line.</li>
+          <li>Three takes to choose from by ear, mixed to −16 LUFS. Music dips about 5 dB under typing.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="footage">
+    <div class="section-head"><h2>What's real, and what isn't yet</h2><p>We only claim what the footage shows.</p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Element</th><th>Source in the film</th><th>Status today</th></tr></thead>
+      <tbody>
+        <tr><td>Expense Desk (React + CopilotKit)</td><td>Captured at 2×</td><td><span class="src real">Built</span> All demo states run with no console errors at 1440 and 1280 wide.</td></tr>
+        <tr><td>Agent behind the desk</td><td>Microsoft Agent Framework on .NET via AG-UI</td><td><span class="src real">Runs end to end</span> With a new Intelligence project; OpenAI stands in for Azure OpenAI until the credentials arrive (Q2). Learned-skill wiring still to finish.</td></tr>
+        <tr><td>Teams chat and both Adaptive Cards</td><td>Tenant capture, or real card JSON rendered by Microsoft's Adaptive Cards SDK</td><td><span class="src real">Cards built</span> <span class="src needs">Tenant: Q3</span></td></tr>
+        <tr><td>Learned rule in Intelligence</td><td>Captured from the Intelligence dashboard</td><td><span class="src needs">Q4</span></td></tr>
+        <tr><td>Learning montage</td><td>Drawn from the seeded approvals (£300, £350, £280 and the new £295)</td><td><span class="src real">Data exists</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="schedule">
+    <div class="section-head"><h2>Schedule to Monday</h2><p>Times in PT.</p></div>
+    <ol class="sched">
+      <li><b>Sun 18 Oct, evening</b><span>Answers on Q1–Q6; direction approved (gates 1 and 2).</span></li>
+      <li><b>Mon 19 Oct, 10:00</b><span>Footage locked: Expense Desk captures, Teams scenes, Intelligence screen.</span></li>
+      <li><b>Mon 19 Oct, 12:00</b><span>Animatic at 1080p with temporary sound, plus three music takes.</span></li>
+      <li><b>Mon 19 Oct, 14:00</b><span>1080p draft with three sound mixes for you to pick from (gate 3).</span></li>
+      <li><b>Mon 19 Oct, 17:00</b><span>4K master, 1080p share copy under 10 MB, poster frame, and the note to Microsoft.</span></li>
+    </ol>
+  </section>
+
+  <footer>Built with the making-launch-films method: approval gates, one timeline file driving picture and sound, and every later change kept cheap. Frames on this page come from the Expense Desk prototype and from our Adaptive Card templates rendered with Microsoft's Adaptive Cards SDK.</footer>
+</div>

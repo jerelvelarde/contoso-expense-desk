@@ -1,0 +1,21 @@
+# Docker build contexts are the repo root (see deploy/*.Dockerfile).
+# Keep them small and keep local secrets out of images.
+**/node_modules
+**/dist
+**/bin
+**/obj
+**/.vs
+**/.vscode
+**/.idea
+**/.DS_Store
+**/*.log
+**/.env
+**/.env.*
+!**/.env.example
+**/*.local
+**/appsettings.*.local.json
+.git
+.claude
+design
+film
+docs

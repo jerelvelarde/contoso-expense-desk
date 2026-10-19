@@ -1,0 +1,55 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "refresh": {
+    "action": { "type": "Action.Execute", "verb": "refresh", "data": { "requestId": "${requestId}" } },
+    "userIds": ["${managerAadId}"]
+  },
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        { "type": "Column", "width": "auto", "items": [{ "type": "TextBlock", "text": "Expenses", "weight": "Bolder", "size": "Small" }] },
+        { "type": "Column", "width": "stretch", "items": [{ "type": "TextBlock", "text": "Approval needed", "isSubtle": true, "size": "Small" }] }
+      ]
+    },
+    { "type": "TextBlock", "text": "Hotel in ${city} · ${purpose}", "weight": "Bolder", "size": "Medium", "wrap": true, "spacing": "Medium" },
+    {
+      "type": "TextBlock",
+      "text": "${requesterName} needs your approval. It's ${overBy} a night over the ${city} cap.",
+      "wrap": true,
+      "spacing": "Small"
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        { "title": "Dates", "value": "${dates} · ${nights} nights" },
+        { "title": "Rate", "value": "${nightlyRate} a night" },
+        { "title": "Total", "value": "${total}" },
+        { "title": "Cost centre", "value": "${costCenter}" },
+        { "title": "Policy", "value": "${overBy}/night over the ${city} cap (${capPerNight})" }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "$when": "${updatedByFinance}",
+      "text": "Updated by Finance: ${updatedFields}",
+      "isSubtle": true,
+      "size": "Small",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    { "type": "Action.Execute", "title": "Approve", "verb": "approve", "style": "positive", "data": { "requestId": "${requestId}" } },
+    {
+      "type": "Action.ShowCard",
+      "title": "Reject",
+      "card": {
+        "type": "AdaptiveCard",
+        "body": [{ "type": "Input.Text", "id": "note", "placeholder": "Reason (shared with ${requesterFirstName})", "isMultiline": true }],
+        "actions": [{ "type": "Action.Execute", "title": "Send rejection", "verb": "reject", "style": "destructive", "data": { "requestId": "${requestId}" } }]
+      }
+    }
+  ]
+}

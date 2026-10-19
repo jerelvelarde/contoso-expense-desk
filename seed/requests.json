@@ -1,0 +1,169 @@
+{
+  "requests": [
+    {
+      "id": "EXP-2036",
+      "createdAt": "2026-09-22T09:14:00Z",
+      "source": {
+        "channel": "teams",
+        "text": "Need a hotel near Canary Wharf for the Barclays workshop, £280 a night for 2 nights."
+      },
+      "requester": {
+        "name": "Amara Nwosu"
+      },
+      "employeeId": "amara.nwosu",
+      "managerId": "jonas.lindqvist",
+      "category": "hotel",
+      "city": "London",
+      "purpose": "Customer workshop",
+      "nightlyRate": 280,
+      "nights": 2,
+      "currency": "GBP",
+      "costCenter": "CC-410 Field Engineering",
+      "status": "approved",
+      "policy": {
+        "ruleId": "HOTEL-LDN",
+        "capPerNight": 250,
+        "outcome": "over",
+        "overBy": 30
+      },
+      "decision": {
+        "outcome": "approved",
+        "by": "jonas.lindqvist",
+        "at": "2026-09-22T09:31:00Z",
+        "channel": "teams"
+      }
+    },
+    {
+      "id": "EXP-2033",
+      "createdAt": "2026-09-08T16:02:00Z",
+      "source": {
+        "channel": "teams",
+        "text": "Partner summit in Manchester, hotel is £140 for one night."
+      },
+      "requester": {
+        "name": "Leo Fischer"
+      },
+      "employeeId": "leo.fischer",
+      "managerId": "jonas.lindqvist",
+      "category": "hotel",
+      "city": "Manchester",
+      "purpose": "Partner summit",
+      "nightlyRate": 140,
+      "nights": 1,
+      "currency": "GBP",
+      "costCenter": "CC-220 Sales UK",
+      "status": "auto_approved",
+      "policy": {
+        "ruleId": "HOTEL-UK",
+        "capPerNight": 150,
+        "outcome": "within"
+      },
+      "decision": {
+        "outcome": "approved",
+        "by": "agent",
+        "at": "2026-09-08T16:02:20Z",
+        "channel": "agent"
+      }
+    },
+    {
+      "id": "EXP-2029",
+      "createdAt": "2026-08-19T11:40:00Z",
+      "source": {
+        "channel": "teams",
+        "text": "London Tech Week, the hotel near the venue is £350 a night for 3 nights."
+      },
+      "requester": {
+        "name": "Hana Sato"
+      },
+      "employeeId": "hana.sato",
+      "managerId": "jonas.lindqvist",
+      "category": "hotel",
+      "city": "London",
+      "purpose": "Tech Week",
+      "nightlyRate": 350,
+      "nights": 3,
+      "currency": "GBP",
+      "costCenter": "CC-310 Marketing",
+      "status": "approved",
+      "policy": {
+        "ruleId": "HOTEL-LDN",
+        "capPerNight": 250,
+        "outcome": "over",
+        "overBy": 100
+      },
+      "decision": {
+        "outcome": "approved",
+        "by": "jonas.lindqvist",
+        "at": "2026-08-19T12:05:00Z",
+        "channel": "teams"
+      }
+    },
+    {
+      "id": "EXP-2024",
+      "createdAt": "2026-07-30T08:22:00Z",
+      "source": {
+        "channel": "teams",
+        "text": "Edinburgh offsite, found a hotel at £190 a night, 2 nights."
+      },
+      "requester": {
+        "name": "Hana Sato"
+      },
+      "employeeId": "hana.sato",
+      "managerId": "jonas.lindqvist",
+      "category": "hotel",
+      "city": "Edinburgh",
+      "purpose": "Team offsite",
+      "nightlyRate": 190,
+      "nights": 2,
+      "currency": "GBP",
+      "costCenter": "CC-310 Marketing",
+      "status": "rejected",
+      "policy": {
+        "ruleId": "HOTEL-UK",
+        "capPerNight": 150,
+        "outcome": "over",
+        "overBy": 40
+      },
+      "decision": {
+        "outcome": "rejected",
+        "by": "jonas.lindqvist",
+        "at": "2026-07-30T09:10:00Z",
+        "channel": "teams",
+        "note": "Use the partner rate at the Caledonian."
+      }
+    },
+    {
+      "id": "EXP-2019",
+      "createdAt": "2026-07-11T13:05:00Z",
+      "source": {
+        "channel": "teams",
+        "text": "Client dinner week in London, hotel is £300 a night, 2 nights."
+      },
+      "requester": {
+        "name": "Leo Fischer"
+      },
+      "employeeId": "leo.fischer",
+      "managerId": "jonas.lindqvist",
+      "category": "hotel",
+      "city": "London",
+      "purpose": "Client meetings",
+      "nightlyRate": 300,
+      "nights": 2,
+      "currency": "GBP",
+      "costCenter": "CC-220 Sales UK",
+      "status": "approved",
+      "policy": {
+        "ruleId": "HOTEL-LDN",
+        "capPerNight": 250,
+        "outcome": "over",
+        "overBy": 50
+      },
+      "decision": {
+        "outcome": "approved",
+        "by": "jonas.lindqvist",
+        "at": "2026-07-11T13:48:00Z",
+        "channel": "teams"
+      }
+    }
+  ]
+}

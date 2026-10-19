@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Expense Desk Moodboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --canvas: #f5f6f8; --surface: #ffffff; --sunken: #eef0f3;
+    --line: #e5e7eb; --line-strong: #d1d5db;
+    --ink: #16171a; --ink-2: #474a52; --ink-3: #676a72;
+    --accent: #0f6cbd; --accent-ink: #0b4f8a; --accent-wash: #ebf3fc;
+    --ok: #17784a; --ok-wash: #e7f3ec;
+    --wait: #9a5400; --wait-wash: #fbf1e1;
+    --stop: #b3261e; --stop-wash: #fbeae8;
+    --learn: #0b6a80; --learn-wash: #e6f3f5;
+    --sans: "Instrument Sans", ui-sans-serif, sans-serif;
+    --serif: "Instrument Serif", ui-serif, Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--canvas); color: var(--ink); font: 14px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 56px 32px 96px; }
+  .label { font-size: 12px; font-weight: 500; color: var(--ink-3); }
+  h1 { font: 600 44px/1.08 var(--sans); letter-spacing: -.02em; margin: 12px 0 16px; max-width: 900px; }
+  h1 span { color: var(--ink-3); }
+  h2 { font: 600 22px/1.2 var(--sans); letter-spacing: -.01em; margin: 0; }
+  .lede { font-size: 16px; color: var(--ink-2); max-width: 720px; margin: 0; }
+  section { margin-top: 64px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line-strong); padding-top: 16px; margin-bottom: 24px; }
+  .section-head p { margin: 0; color: var(--ink-2); max-width: 560px; }
+  code, .mono { font-family: var(--mono); font-size: 12px; }
+
+  .refs { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+  .ref { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .ref img { width: 100%; display: block; height: 240px; object-fit: cover; object-position: center; border-bottom: 1px solid var(--line); background: var(--sunken); }
+  .ref .meta { padding: 14px 16px 16px; }
+  .ref .name { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-weight: 600; }
+  .ref .name span { font: 400 12px var(--mono); color: var(--ink-3); }
+  .ref .pattern { margin-top: 4px; font-size: 12px; font-weight: 500; color: var(--accent-ink); }
+  .src { display: inline-block; font-style: normal; margin-left: 6px; padding: 1px 6px; border-radius: 4px; background: var(--sunken); font: 500 11px var(--sans); color: var(--ink-3); vertical-align: 1px; }
+  .ref img.contain { object-fit: contain; padding: 16px; }
+  .ref p { margin: 6px 0 0; color: var(--ink-2); font-size: 13px; }
+  .c4 { grid-column: span 4; } .c6 { grid-column: span 6; } .c8 { grid-column: span 8; }
+
+  .direction { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+  .sw { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .sw i { display: block; height: 48px; }
+  .sw b { display: block; font: 500 12px var(--sans); padding: 8px 10px 0; }
+  .sw code { display: block; font-size: 11px; color: var(--ink-3); padding: 0 10px 8px; }
+  .type-row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .type-row:last-child { border-bottom: 0; }
+  .muted { color: var(--ink-3); }
+
+  .specimens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 9px; border-radius: 999px; font: 500 12px var(--sans); white-space: nowrap; }
+  .pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .p-ok { color: var(--ok); background: var(--ok-wash); }
+  .p-wait { color: var(--wait); background: var(--wait-wash); }
+  .p-stop { color: var(--stop); background: var(--stop-wash); }
+  .p-learn { color: var(--learn); background: var(--learn-wash); }
+  .p-learn::before { content: "✦"; width: auto; height: auto; background: none; font-size: 10px; }
+  .rules { margin-top: 12px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .rule { display: flex; justify-content: space-between; padding: 10px 12px; font-size: 13px; color: var(--ink-2); }
+  .rule + .rule { border-top: 1px solid var(--line); }
+  .rule b { font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .rule.warn { background: #fdf8ef; } .rule.warn b { color: var(--wait); }
+  .step { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 7px 0; font-size: 13px; align-items: start; }
+  .dot { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; }
+  .d-done { background: var(--ink); color: #fff; }
+  .d-warn { background: var(--wait-wash); color: var(--wait); box-shadow: inset 0 0 0 1px #e9cfa4; }
+  .d-wait { background: var(--wait-wash); box-shadow: inset 0 0 0 1px #e0b57a; }
+  .d-wait::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--wait); }
+  .d-edit { background: var(--accent-wash); color: var(--accent-ink); }
+  .chip { display: inline-flex; align-items: center; height: 20px; padding: 0 6px; border-radius: 6px; background: var(--sunken); font: 12px var(--mono); color: var(--ink-2); }
+  .meta-line { display: flex; gap: 8px; align-items: center; margin-top: 3px; font-size: 12px; color: var(--ink-3); }
+  .learned-card { margin-top: 12px; border-radius: 10px; padding: 14px; background: linear-gradient(var(--surface), var(--surface)) padding-box, linear-gradient(135deg, #0f6cbd, #0e8a8a) border-box; border: 1px solid transparent; }
+
+  .states { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .state { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; min-height: 270px; }
+  .state h4 { margin: 0; font: 600 13px var(--sans); }
+  .state .n { font: 500 12px var(--mono); color: var(--ink-3); }
+  .mini { flex: 1; border: 1px solid var(--line); border-radius: 8px; background: var(--canvas); padding: 6px; display: grid; grid-template-columns: 34% 1fr; gap: 5px; }
+  .mini .col { display: flex; flex-direction: column; gap: 4px; }
+  .mini .main { display: grid; grid-template-columns: 1fr 34%; gap: 4px; align-content: start; }
+  .mini .main .hd { grid-column: 1 / -1; }
+  .blk { border-radius: 4px; background: var(--surface); border: 1px solid var(--line); height: 13px; }
+  .blk.t { height: 26px; } .blk.on { border-color: var(--accent); background: var(--accent-wash); }
+  .blk.w { background: var(--wait-wash); border-color: #ecd2a8; } .blk.g { background: var(--ok-wash); border-color: #bfe0cc; }
+  .blk.l { background: var(--learn-wash); border-color: #9fd3d6; }
+  .blk.ghost { background: transparent; border-style: dashed; }
+  .state p { margin: 0; font-size: 12px; color: var(--ink-2); }
+  .shows { font: 12px/1.5 var(--mono); color: var(--ink-3); }
+
+  .avoid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .avoid div { padding: 16px; border-radius: 12px; border: 1px dashed var(--line-strong); color: var(--ink-2); font-size: 13px; }
+  .avoid b { display: block; color: var(--ink); margin-bottom: 4px; }
+  footer { margin-top: 64px; color: var(--ink-3); font-size: 12px; }
+  @media (max-width: 900px) {
+    .refs > * { grid-column: span 12; }
+    .direction, .specimens, .avoid { grid-template-columns: 1fr; }
+    .states { grid-template-columns: repeat(2, 1fr); }
+    h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="label">Contoso Expense Desk · Microsoft Agent Framework × CopilotKit · Moodboard v2 (after design review)</div>
+  <h1>The agent does the work. <span>The screen shows only what just changed, and the proof is one click away.</span></h1>
+  <p class="lede">A finance surface that sits comfortably next to Teams: neutral greys, Fluent blue as the only brand colour, sans-serif tabular numbers, and an agent activity feed whose every step names the tool behind it.</p>
+
+  <section>
+    <div class="section-head"><h2>References</h2><p>Each picked for one pattern we use. Tagged by source: product UI, a marketing page showing product UI, or our own render. We borrow patterns, not branding.</p></div>
+    <div class="refs">
+      <figure class="ref c6"><img src="moodboard/refs/linear-agent-feed.jpg" alt="Linear agent activity feed and agent work list" />
+        <div class="meta"><div class="name"><span style="font:inherit;color:inherit">Linear for Agents<i class="src">Product UI</i></span> <span>linear.app/agents</span></div>
+        <div class="pattern">→ Agent activity timeline</div>
+        <p>One line per action: actor in ink, verb in grey, object in ink, relative time. A small status glyph on a thin rail. This is the shape of our timeline.</p></div></figure>
+      <figure class="ref c6"><img src="moodboard/refs/github-agent-session.jpg" alt="GitHub Copilot agent session log" />
+        <div class="meta"><div class="name"><span style="font:inherit;color:inherit">GitHub Copilot agent session<i class="src">Product UI</i></span> <span>github.com</span></div>
+        <div class="pattern">→ Tool calls you can open</div>
+        <p>Each tool step is a plain sentence with a chevron; the raw call is one click away. Our <code>check_policy</code> chips work the same way.</p></div></figure>
+
+      <figure class="ref c8"><img src="moodboard/refs/ramp-recommended.jpg" alt="Ramp approval recommendation cards" />
+        <div class="meta"><div class="name"><span style="font:inherit;color:inherit">Ramp<i class="src">Marketing page</i></span> <span>ramp.com/expense-management</span></div>
+        <div class="pattern">→ Verdict first, reason second</div>
+        <p>"Approval recommended" then why, then the policy chip. Our step titles lead with the verdict ("Over the London hotel cap") and the rule rows follow.</p></div></figure>
+      <figure class="ref c4"><img src="moodboard/refs/brex-rules.jpg" alt="Brex policy rule rows" />
+        <div class="meta"><div class="name"><span style="font:inherit;color:inherit">Brex<i class="src">Marketing page</i></span> <span>brex.com</span></div>
+        <div class="pattern">→ Policy as rule rows</div>
+        <p>Key → limit rows, with one tinted row for the rule that matters. Amber means "needs a person", not "rejected".</p></div></figure>
+
+      <figure class="ref c4"><img class="contain" src="moodboard/refs/teams-approval-card.png" alt="The manager's approval Adaptive Card rendered by the Adaptive Cards SDK" />
+        <div class="meta"><div class="name"><span style="font:inherit;color:inherit">Approval Adaptive Card<i class="src">Our render</i></span> <span>cards/approval-request.json</span></div>
+        <div class="pattern">→ Teams card preview</div>
+        <p>Our real template, expanded and rendered with Microsoft's Adaptive Cards SDK (<code>design/render_card.py</code>). The dashboard's preview must match it fact for fact.</p></div></figure>
+      <figure class="ref c4"><img src="moodboard/refs/mercury-rows.jpg" alt="Mercury account rows" />
+        <div class="meta"><div class="name"><span style="font:inherit;color:inherit">Mercury<i class="src">Marketing page</i></span> <span>mercury.com</span></div>
+        <div class="pattern">→ Queue rows</div>
+        <p>Right-aligned tabular amounts, generous row height, almost no chrome.</p></div></figure>
+      <figure class="ref c4"><img src="moodboard/refs/attio-agent-panel.jpg" alt="Attio agent panel next to a table" />
+        <div class="meta"><div class="name"><span style="font:inherit;color:inherit">Attio<i class="src">Marketing page</i></span> <span>attio.com</span></div>
+        <div class="pattern">→ Agent work beside the record</div>
+        <p>The agent's output sits next to the thing it changes, not in a separate chat.</p></div></figure>
+
+      <figure class="ref c6"><img src="moodboard/refs/m365-copilot-home.jpg" alt="Microsoft 365 Copilot home" />
+        <div class="meta"><div class="name"><span style="font:inherit;color:inherit">Microsoft 365 Copilot<i class="src">Marketing page</i></span> <span>microsoft.com</span></div>
+        <div class="pattern">→ Audience fit</div>
+        <p>Cool neutrals, 8px radius, soft blue. The Microsoft audience should feel at home without us copying Microsoft's branding.</p></div></figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Direction</h2><p>Cool neutrals, sans-serif everywhere, colour only where it carries status. One serif sentence and one gradient, both reserved for the learned rule.</p></div>
+    <div class="direction">
+      <div class="panel">
+        <div class="label">Palette</div>
+        <div class="swatches">
+          <div class="sw"><i style="background:var(--canvas)"></i><b>Canvas</b><code>#F5F6F8</code></div>
+          <div class="sw"><i style="background:var(--surface)"></i><b>Surface</b><code>#FFFFFF</code></div>
+          <div class="sw"><i style="background:var(--ink)"></i><b>Ink</b><code>#16171A</code></div>
+          <div class="sw"><i style="background:var(--accent)"></i><b>Fluent blue</b><code>#0F6CBD</code></div>
+          <div class="sw"><i style="background:var(--wait)"></i><b>Needs a person</b><code>#9A5400</code></div>
+          <div class="sw"><i style="background:var(--ok)"></i><b>Approved</b><code>#17784A</code></div>
+          <div class="sw"><i style="background:var(--stop)"></i><b>Rejected</b><code>#B3261E</code></div>
+          <div class="sw"><i style="background:linear-gradient(135deg,#0f6cbd,#0e8a8a)"></i><b>Learned</b><code>#0B6A80</code></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="label">Type</div>
+        <div class="type-row"><span class="muted">Amount · 26</span><span style="font:600 26px var(--sans);letter-spacing:-.01em;font-variant-numeric:tabular-nums">£960</span></div>
+        <div class="type-row"><span class="muted">UI · 13–22</span><span style="font-size:15px">Hotel in London <span class="muted">· AI Summit</span></span></div>
+        <div class="type-row"><span class="muted">Mono · 12</span><span><span class="chip" style="margin:0">check_policy</span> <span class="mono muted">EXP-2037</span></span></div>
+        <div class="type-row"><span class="muted">Serif · once</span><span style="font:400 21px/1.2 var(--serif)">London hotels are approved up to £350 a night.</span></div>
+      </div>
+    </div>
+
+    <div class="specimens">
+      <div class="panel">
+        <div class="label">Status vocabulary</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+          <span class="pill p-wait">Waiting on Jonas</span><span class="pill p-ok">Approved by Jonas</span><span class="pill p-stop">Rejected by Jonas</span><span class="pill p-learn">Approved · learned rule</span>
+        </div>
+        <div class="rules">
+          <div class="rule">London hotel cap <b>£250/night</b></div>
+          <div class="rule warn">This request <b>+£70 &nbsp;£320/night</b></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="label">Agent activity</div>
+        <div class="step"><span class="dot d-done">✓</span><div><b>Amara Nwosu reports to Jonas Lindqvist</b><div class="meta-line"><span class="chip">lookup_employee ⌄</span></div></div></div>
+        <div class="step"><span class="dot d-warn">!</span><div><b>Over the London hotel cap</b> <span class="muted">by £70 a night</span><div class="meta-line"><span class="chip">check_policy ⌄</span></div></div></div>
+        <div class="step"><span class="dot d-wait"></span><div><b>Waiting on Jonas Lindqvist</b> <span class="muted">in Teams</span><div class="meta-line"><span class="chip">submit_approval_request ⌄</span></div></div></div>
+        <div class="step"><span class="dot d-edit">✎</span><div><b>Priya in Finance changed the nightly rate</b> <span class="muted"><s>£320</s> → £295</span><div class="meta-line" style="color:var(--ok)">✓ Synced to the agent</div></div></div>
+      </div>
+      <div class="panel">
+        <div class="label">The payoff</div>
+        <div class="learned-card">
+          <span class="pill p-learn">New from Automatic Learning</span>
+          <p style="margin:10px 0 4px;font:400 21px/1.2 var(--serif)">London hotels are approved up to £350 a night.</p>
+          <p class="muted" style="margin:0;font-size:12px">From 4 approvals by Jonas Lindqvist at £295 · £280 · £350 · £300</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Only what the moment needs</h2><p>Each component appears when the run produces its data and steps back when it stops being useful. Blue marks what just appeared.</p></div>
+    <div class="states">
+      <div class="state"><span class="n">01</span><h4>Idle</h4>
+        <div class="mini"><div class="col"><div class="blk"></div><div class="blk"></div><div class="blk"></div></div><div class="main"><div class="blk ghost t hd"></div></div></div>
+        <p>Past requests and one line: nothing needs you. No presenter hint, no mode labels.</p><div class="shows">queue · empty state</div></div>
+      <div class="state"><span class="n">02</span><h4>Request arrives</h4>
+        <div class="mini"><div class="col"><div class="blk on"></div><div class="blk"></div><div class="blk"></div></div><div class="main"><div class="blk on hd"></div><div class="blk t on"></div></div></div>
+        <p>Row slides in and opens. Sticky header with status. The Teams message and what the agent read from it.</p><div class="shows">+ header · + "read as"</div></div>
+      <div class="state"><span class="n">03</span><h4>Policy check</h4>
+        <div class="mini"><div class="col"><div class="blk"></div><div class="blk"></div><div class="blk"></div></div><div class="main"><div class="blk hd"></div><div class="blk"></div><div class="blk on"></div><div class="blk on"></div></div></div>
+        <p>Tool steps stream in with their names. Details stay hidden while the agent is still reading.</p><div class="shows">+ lookup · + rule rows</div></div>
+      <div class="state"><span class="n">04</span><h4>Waiting on Jonas</h4>
+        <div class="mini"><div class="col"><div class="blk w"></div><div class="blk"></div><div class="blk"></div></div><div class="main"><div class="blk w hd"></div><div class="blk w t"></div><div class="blk on t"></div></div></div>
+        <p>Agent paused (top bar says so). Teams card preview and the editable Details card appear.</p><div class="shows">+ card · + details</div></div>
+      <div class="state"><span class="n">05</span><h4>Finance edits</h4>
+        <div class="mini"><div class="col"><div class="blk w"></div><div class="blk"></div><div class="blk"></div></div><div class="main"><div class="blk w hd"></div><div class="blk on"></div><div class="blk on"></div><div class="blk"></div></div></div>
+        <p>An edit step, a re-check, the old check marked superseded, the card refreshed by the agent.</p><div class="shows">+ edit · + re-check</div></div>
+      <div class="state"><span class="n">06</span><h4>Decided · learned</h4>
+        <div class="mini"><div class="col"><div class="blk g"></div><div class="blk l"></div><div class="blk"></div></div><div class="main"><div class="blk g hd"></div><div class="blk l"></div><div class="blk l t"></div></div></div>
+        <p>Card collapses, fields lock. A learned rule is announced once from the top bar, then cited inline.</p><div class="shows">− card · + learned rule</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>What we leave out</h2><p>The common causes of "ugly" and "AI-generated" in agent demos.</p></div>
+    <div class="avoid">
+      <div><b>A giant number nobody reads</b>Status, not the amount, is the most important thing in the header. The amount is 26px sans, tabular.</div>
+      <div><b>A permanent chat column</b>The employee talks in Teams. The dashboard shows the agent's work, not a second chat.</div>
+      <div><b>Fields before they exist</b>Details appear once the agent has read and checked them, and lock after the decision.</div>
+      <div><b>Raw JSON by default</b>Each tool call is a sentence. Its args and result open from the tool chip.</div>
+      <div><b>Editorial styling</b>No cream paper, serif headlines or tracked mono eyebrows. One serif sentence for the learned rule.</div>
+      <div><b>Spinners and mode labels</b>Live steps pulse. The top bar says what the agent is doing (Working, Paused), never how it is hosted.</div>
+    </div>
+  </section>
+
+  <footer>Reference screenshots captured from public pages on 18 Oct 2026, for internal design reference only. Ramp's approvals page and Microsoft's Teams Approvals docs returned 404 at capture time.</footer>
+</div>
+</body>
+</html>

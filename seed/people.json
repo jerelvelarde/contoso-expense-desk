@@ -1,0 +1,55 @@
+{
+  "employees": [
+    {
+      "id": "amara.nwosu",
+      "name": "Amara Nwosu",
+      "title": "Solutions Engineer",
+      "department": "Field Engineering",
+      "office": "London",
+      "costCenter": "CC-410 Field Engineering",
+      "managerId": "jonas.lindqvist",
+      "teamsRole": "employee"
+    },
+    {
+      "id": "jonas.lindqvist",
+      "name": "Jonas Lindqvist",
+      "title": "Head of Go-to-Market, EMEA",
+      "department": "Go-to-Market",
+      "office": "London",
+      "costCenter": "CC-400 Go-to-Market EMEA",
+      "managerId": "elena.marsh",
+      "teamsRole": "manager"
+    },
+    {
+      "id": "leo.fischer",
+      "name": "Leo Fischer",
+      "title": "Account Executive",
+      "department": "Sales",
+      "office": "Manchester",
+      "costCenter": "CC-220 Sales UK",
+      "managerId": "jonas.lindqvist"
+    },
+    {
+      "id": "hana.sato",
+      "name": "Hana Sato",
+      "title": "Product Marketing Manager",
+      "department": "Marketing",
+      "office": "London",
+      "costCenter": "CC-310 Marketing",
+      "managerId": "jonas.lindqvist"
+    },
+    {
+      "id": "elena.marsh",
+      "name": "Elena Marsh",
+      "title": "Chief Revenue Officer",
+      "department": "Revenue",
+      "office": "London",
+      "costCenter": "CC-100 Revenue"
+    }
+  ],
+  "finance": {
+    "id": "priya.raman",
+    "name": "Priya Raman",
+    "title": "Finance Operations"
+  }
+}

@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #f5f6f8;
+  --color-surface: #ffffff;
+  --color-sunken: #eef0f3;
+  --color-line: #e5e7eb;
+  --color-line-strong: #d1d5db;
+  --color-ink: #16171a;
+  --color-ink-2: #474a52;
+  --color-ink-3: #676a72;
+  --color-accent: #0f6cbd;
+  --color-accent-ink: #0b4f8a;
+  --color-accent-wash: #ebf3fc;
+  --color-ok: #17784a;
+  --color-ok-wash: #e7f3ec;
+  --color-wait: #9a5400;
+  --color-wait-wash: #fbf1e1;
+  --color-stop: #b3261e;
+  --color-stop-wash: #fbeae8;
+  --color-learn: #0b6a80;
+  --color-learn-wash: #e6f3f5;
+  --color-teams: #5b5fc7;
+
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  --shadow-sheet: 0 1px 2px rgb(22 23 26 / 0.04), 0 0 0 1px rgb(22 23 26 / 0.05);
+  --shadow-float: 0 12px 32px -12px rgb(22 23 26 / 0.22), 0 0 0 1px rgb(22 23 26 / 0.06);
+
+  --animate-pulse-ring: pulse-ring 1.8s ease-out infinite;
+  --animate-fade-wash: fade-wash 2.4s ease-out forwards;
+  --animate-fade-wash-long: fade-wash 4s ease-in forwards;
+
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 var(--ring, rgb(15 108 189 / 0.35)); }
+    70% { box-shadow: 0 0 0 7px rgb(0 0 0 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(0 0 0 / 0); }
+  }
+  @keyframes fade-wash {
+    from { background-color: var(--color-accent-wash); }
+    to { background-color: transparent; }
+  }
+}
+
+@layer base {
+  html, body, #root { height: 100%; }
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--color-accent-wash); }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 6px; }
+  button { cursor: pointer; }
+}
+
+@utility tabular { font-variant-numeric: tabular-nums; }
+
+@utility learned-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    linear-gradient(135deg, #0f6cbd, #0e8a8a) border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

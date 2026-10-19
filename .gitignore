@@ -1,0 +1,35 @@
+# Dependencies and builds
+node_modules/
+dist/
+bin/
+obj/
+TestResults/
+*.tsbuildinfo
+
+# Local secrets and env (examples are committed)
+.env
+.env.*
+!.env.example
+
+# Tool and editor state
+.claude/
+.vscode/
+.idea/
+.DS_Store
+
+# Generated QA captures and render outputs (regenerate with the scripts)
+design/review/
+film/studio/out/
+film/capture/*/frames/
+film/capture/*/frames.txt
+film/capture/*/check/
+film/capture/*/desk.mp4
+film/versions/**/*-A-full-foley.mp4
+film/versions/**/*-B-light-foley.mp4
+film/versions/**/*-C-music-only.mp4
+
+# Third-party product screenshots used only as internal design reference
+design/moodboard/refs/*.jpg
+
+# CopilotKit CLI project binding (internal project, org and telemetry ids)
+.copilotkit/

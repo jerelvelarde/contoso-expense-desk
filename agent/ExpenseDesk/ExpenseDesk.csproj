@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AGUI.Abstractions" Version="1.0.1" />
+    <PackageReference Include="AGUI.Server" Version="1.0.1" />
+    <PackageReference Include="Azure.Identity" Version="1.21.0" />
+    <PackageReference Include="CopilotKit.Intelligence.AgentFramework" Version="0.1.0-rc.1" />
+    <PackageReference Include="CopilotKit.Intelligence.Runtime" Version="0.1.0-rc.1" />
+    <PackageReference Include="Microsoft.Agents.AI" Version="1.25.0" />
+    <PackageReference Include="Microsoft.Agents.AI.Hosting.AGUI.AspNetCore" Version="1.25.0-preview.261014.1" />
+    <PackageReference Include="Microsoft.Agents.AI.OpenAI" Version="1.25.0" />
+  </ItemGroup>
+
+</Project>

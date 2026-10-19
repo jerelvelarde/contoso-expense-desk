@@ -1,0 +1,693 @@
+{
+ "fps": 30,
+ "duration": 68.0,
+ "bpm": 120,
+ "layout": {
+  "amara": {
+   "x": 72,
+   "y": 248,
+   "w": 480,
+   "h": 372
+  },
+  "jonas": {
+   "x": 72,
+   "y": 632,
+   "w": 480,
+   "h": 371
+  },
+  "desk": {
+   "x": 648,
+   "y": 248,
+   "w": 1200,
+   "h": 750
+  },
+  "headline": {
+   "x": 72,
+   "y": 60
+  }
+ },
+ "deskK": 0.8333333333333334,
+ "desk": {
+  "src": "desk.mp4",
+  "css": [
+   1440,
+   900
+  ],
+  "segments": [
+   {
+    "f0": 0.0,
+    "f1": 5.5,
+    "c0": 1.588,
+    "rate": 0.0
+   },
+   {
+    "f0": 5.5,
+    "f1": 15.3,
+    "c0": 1.988,
+    "rate": 1.0
+   },
+   {
+    "f0": 15.3,
+    "f1": 17.8,
+    "c0": 11.788,
+    "rate": 0.0
+   },
+   {
+    "f0": 17.8,
+    "f1": 21.95,
+    "c0": 12.2,
+    "rate": 1.0
+   },
+   {
+    "f0": 21.95,
+    "f1": 31.0,
+    "c0": 16.35,
+    "rate": 0.0
+   },
+   {
+    "f0": 31.0,
+    "f1": 34.95,
+    "c0": 17.455,
+    "rate": 1.0
+   },
+   {
+    "f0": 34.95,
+    "f1": 42.4,
+    "c0": 21.405,
+    "rate": 0.0
+   },
+   {
+    "f0": 42.4,
+    "f1": 46.2,
+    "c0": 21.595,
+    "rate": 1.0
+   },
+   {
+    "f0": 46.2,
+    "f1": 52.0,
+    "c0": 25.395000000000003,
+    "rate": 0.0
+   },
+   {
+    "f0": 52.0,
+    "f1": 52.6,
+    "c0": 26.23,
+    "rate": 1.0
+   },
+   {
+    "f0": 52.6,
+    "f1": 54.977,
+    "c0": 26.830000000000002,
+    "rate": 1.8805216659655004
+   },
+   {
+    "f0": 54.977,
+    "f1": 58.827,
+    "c0": 31.3,
+    "rate": 1.0
+   },
+   {
+    "f0": 58.827,
+    "f1": 68.0,
+    "c0": 35.15,
+    "rate": 0.0
+   }
+  ],
+  "speedChip": {
+   "f0": 52.6,
+   "f1": 54.977,
+   "label": "1.9× speed"
+  }
+ },
+ "events": {
+  "request_row": 5.565,
+  "lookup_done": 8.511,
+  "policy_over": 10.583,
+  "waiting_step": 12.826,
+  "reply1": 13.665,
+  "edit_click": 18.028,
+  "edit_commit": 19.231,
+  "recheck": 20.378,
+  "card_refreshed": 20.647,
+  "approved": 32.517,
+  "reply_approved": 32.926,
+  "learned": 43.811,
+  "act4_row": 52.186,
+  "act4_policy": 55.249,
+  "act4_decision": 57.0,
+  "act4_reply": 57.379,
+  "type_2": 18.447,
+  "type_9": 18.634,
+  "type_5": 18.816
+ },
+ "send": [
+  5.5,
+  52.0
+ ],
+ "approve": 31.0,
+ "decision2": 57.0,
+ "typing": [
+  {
+   "start": 0.9,
+   "end": 5.05,
+   "text": "I need to book a hotel in London for the AI Summit, 4 to 7 Nov, around £320 a night.",
+   "cps": 20.24
+  },
+  {
+   "start": 48.5,
+   "end": 51.7,
+   "text": "Booking London again for the AI Summit follow-up workshop, 18 to 20 Nov, £335 a night.",
+   "cps": 26.87
+  }
+ ],
+ "teams": [
+  {
+   "t": 5.5,
+   "panel": "amara",
+   "kind": "user",
+   "text": "I need to book a hotel in London for the AI Summit, 4 to 7 Nov, around £320 a night."
+  },
+  {
+   "t": 5.85,
+   "until": 13.665,
+   "panel": "amara",
+   "kind": "thinking"
+  },
+  {
+   "t": 12.976,
+   "panel": "jonas",
+   "kind": "card",
+   "card": {
+    "src": "cards/teams-approval-card.png",
+    "w": 924,
+    "h": 532
+   },
+   "id": "jonas-card"
+  },
+  {
+   "t": 13.765,
+   "panel": "amara",
+   "kind": "card",
+   "card": {
+    "src": "cards/teams-summary-card.png",
+    "w": 924,
+    "h": 464
+   }
+  },
+  {
+   "t": 20.747,
+   "panel": "jonas",
+   "kind": "swap",
+   "card": {
+    "src": "cards/teams-approval-edited-card.png",
+    "w": 924,
+    "h": 580
+   },
+   "id": "jonas-card"
+  },
+  {
+   "t": 31.25,
+   "panel": "jonas",
+   "kind": "swap",
+   "card": {
+    "src": "cards/teams-approval-decided-card.png",
+    "w": 924,
+    "h": 396
+   },
+   "id": "jonas-card"
+  },
+  {
+   "t": 32.976,
+   "panel": "amara",
+   "kind": "bot",
+   "text": "Good news, Amara: Jonas approved your London hotel at £295 a night (£885). Finance adjusted the rate from £320. It's logged against CC-410 Field Engineering."
+  },
+  {
+   "t": 52.0,
+   "panel": "amara",
+   "kind": "user",
+   "text": "Booking London again for the AI Summit follow-up workshop, 18 to 20 Nov, £335 a night."
+  },
+  {
+   "t": 52.35,
+   "until": 57.379,
+   "panel": "amara",
+   "kind": "thinking"
+  },
+  {
+   "t": 57.479,
+   "panel": "amara",
+   "kind": "card",
+   "card": {
+    "src": "cards/teams-summary-learned-card.png",
+    "w": 924,
+    "h": 630
+   }
+  }
+ ],
+ "pulses": [
+  {
+   "t": 5.55,
+   "from": "amara",
+   "to": "desk"
+  },
+  {
+   "t": 12.576,
+   "from": "desk",
+   "to": "jonas"
+  },
+  {
+   "t": 13.465,
+   "from": "desk",
+   "to": "amara"
+  },
+  {
+   "t": 20.447,
+   "from": "desk",
+   "to": "jonas"
+  },
+  {
+   "t": 31.05,
+   "from": "jonas",
+   "to": "desk"
+  },
+  {
+   "t": 32.726,
+   "from": "desk",
+   "to": "amara"
+  },
+  {
+   "t": 52.05,
+   "from": "amara",
+   "to": "desk"
+  },
+  {
+   "t": 57.179,
+   "from": "desk",
+   "to": "amara"
+  }
+ ],
+ "headlines": [
+  {
+   "in": 1.0,
+   "out": 7.6,
+   "l1": "Ask in Teams."
+  },
+  {
+   "in": 8.4,
+   "in2": 10.583,
+   "out": 16.6,
+   "l1": "Finance sees",
+   "l2": "every step."
+  },
+  {
+   "in": 17.4,
+   "in2": 20.378,
+   "out": 24.1,
+   "l1": "Fix a detail.",
+   "l2": "The agent keeps up."
+  },
+  {
+   "in": 24.9,
+   "in2": 31.3,
+   "out": 35.4,
+   "l1": "Managers decide",
+   "l2": "where they already work."
+  },
+  {
+   "in": 36.2,
+   "in2": 41.4,
+   "out": 47.6,
+   "l1": "It learns",
+   "l2": "how your managers decide."
+  },
+  {
+   "in": 48.2,
+   "in2": 57.0,
+   "out": 59.0,
+   "l1": "Next time,",
+   "l2": "it decides and says why."
+  }
+ ],
+ "camera": [
+  [
+   0.0,
+   {
+    "fx": 312.0,
+    "fy": 434.0,
+    "s": 1.62,
+    "tx": 960,
+    "ty": 640
+   }
+  ],
+  [
+   6.3,
+   {
+    "fx": 312.0,
+    "fy": 434.0,
+    "s": 1.62,
+    "tx": 960,
+    "ty": 640
+   }
+  ],
+  [
+   8.3,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   9.0,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   10.4,
+   {
+    "fx": 1381.3333333333335,
+    "fy": 681.3333333333334,
+    "s": 1.42,
+    "tx": 1080,
+    "ty": 640
+   }
+  ],
+  [
+   12.0,
+   {
+    "fx": 1381.3333333333335,
+    "fy": 681.3333333333334,
+    "s": 1.42,
+    "tx": 1080,
+    "ty": 640
+   }
+  ],
+  [
+   13.1,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   16.8,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   17.9,
+   {
+    "fx": 1689.6666666666667,
+    "fy": 523.0,
+    "s": 1.55,
+    "tx": 1200,
+    "ty": 600
+   }
+  ],
+  [
+   19.6,
+   {
+    "fx": 1689.6666666666667,
+    "fy": 523.0,
+    "s": 1.55,
+    "tx": 1200,
+    "ty": 600
+   }
+  ],
+  [
+   20.5,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   24.4,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   26.1,
+   {
+    "fx": 312.0,
+    "fy": 817.5,
+    "s": 1.62,
+    "tx": 900,
+    "ty": 640
+   }
+  ],
+  [
+   31.35,
+   {
+    "fx": 312.0,
+    "fy": 817.5,
+    "s": 1.62,
+    "tx": 900,
+    "ty": 640
+   }
+  ],
+  [
+   32.5,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   42.3,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   43.6,
+   {
+    "fx": 1689.6666666666667,
+    "fy": 564.6666666666667,
+    "s": 1.45,
+    "tx": 1180,
+    "ty": 620
+   }
+  ],
+  [
+   47.4,
+   {
+    "fx": 1689.6666666666667,
+    "fy": 564.6666666666667,
+    "s": 1.45,
+    "tx": 1180,
+    "ty": 620
+   }
+  ],
+  [
+   48.6,
+   {
+    "fx": 312.0,
+    "fy": 434.0,
+    "s": 1.38,
+    "tx": 760,
+    "ty": 630
+   }
+  ],
+  [
+   51.8,
+   {
+    "fx": 312.0,
+    "fy": 434.0,
+    "s": 1.38,
+    "tx": 760,
+    "ty": 630
+   }
+  ],
+  [
+   53.0,
+   {
+    "fx": 1381.3333333333335,
+    "fy": 714.6666666666667,
+    "s": 1.38,
+    "tx": 1080,
+    "ty": 640
+   }
+  ],
+  [
+   57.5,
+   {
+    "fx": 1381.3333333333335,
+    "fy": 714.6666666666667,
+    "s": 1.38,
+    "tx": 1080,
+    "ty": 640
+   }
+  ],
+  [
+   58.5,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   59.4,
+   {
+    "fx": 960,
+    "fy": 540,
+    "s": 1.0,
+    "tx": 960,
+    "ty": 540
+   }
+  ],
+  [
+   62.2,
+   {
+    "fx": 960,
+    "fy": 600,
+    "s": 0.9,
+    "tx": 960,
+    "ty": 560
+   }
+  ]
+ ],
+ "cursors": [
+  {
+   "in": 17.128,
+   "at": 17.948,
+   "click": 18.028,
+   "out": 19.831,
+   "from": [
+    1888,
+    808
+   ],
+   "to": [
+    1784.484375,
+    521.6197916666667
+   ],
+   "park": [
+    1908,
+    888
+   ],
+   "kind": "click"
+  },
+  {
+   "in": 28.5,
+   "at": 30.0,
+   "click": 31.0,
+   "out": 31.3,
+   "from": [
+    672,
+    752
+   ],
+   "to": [
+    177.02164502164504,
+    959.2705627705627
+   ],
+   "park": [
+    712,
+    932
+   ],
+   "kind": "approve"
+  }
+ ],
+ "cardW": 410,
+ "montage": {
+  "in": 35.9,
+  "out": 42.5,
+  "chip": 36.0,
+  "stamps": [
+   {
+    "t": 37.0,
+    "month": "Jul",
+    "who": "Leo Fischer",
+    "rate": 300,
+    "id": "EXP-2019"
+   },
+   {
+    "t": 38.0,
+    "month": "Aug",
+    "who": "Hana Sato",
+    "rate": 350,
+    "id": "EXP-2029"
+   },
+   {
+    "t": 39.0,
+    "month": "Sep",
+    "who": "Amara Nwosu",
+    "rate": 280,
+    "id": "EXP-2036"
+   },
+   {
+    "t": 40.0,
+    "month": "Today",
+    "who": "Amara Nwosu",
+    "rate": 295,
+    "id": "EXP-2037"
+   }
+  ],
+  "line": [
+   40.6,
+   41.3
+  ],
+  "rule": 41.4,
+  "cap": 350
+ },
+ "end": {
+  "wash": 62.0,
+  "title": 62.5,
+  "stack": 63.2,
+  "silence": 67.0,
+  "stack_items": [
+   "Microsoft Agent Framework",
+   "Azure OpenAI",
+   "Microsoft Teams",
+   "AG-UI",
+   "CopilotKit"
+  ]
+ },
+ "cuts": [
+  [
+   16.6,
+   19.6
+  ],
+  [
+   26.5,
+   29.0
+  ],
+  [
+   40.5,
+   43.0
+  ]
+ ]
+}

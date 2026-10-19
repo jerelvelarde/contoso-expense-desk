@@ -1,0 +1,47 @@
+{
+  "fps": 30,
+  "css": [
+    1440,
+    900
+  ],
+  "dpr": 2,
+  "duration": 34.667,
+  "frames": 1380,
+  "marks": {
+    "act1_key": 1.988,
+    "request_row": 2.053,
+    "lookup_done": 4.999,
+    "policy_over": 7.071,
+    "waiting_step": 9.314,
+    "reply1": 10.153,
+    "edit_click": 12.428,
+    "type_2": 12.847,
+    "type_9": 13.034,
+    "type_5": 13.216,
+    "edit_commit": 13.631,
+    "recheck": 14.778,
+    "synced": 15.047,
+    "card_refreshed": 15.047,
+    "approve_key": 17.455,
+    "approved": 18.972,
+    "reply_approved": 19.381,
+    "learn_key": 21.595,
+    "learned": 23.006,
+    "act4_key": 26.23,
+    "act4_row": 26.416,
+    "act4_lookup": 26.465,
+    "act4_policy": 31.572,
+    "act4_decision": 33.323,
+    "act4_reply": 33.702
+  },
+  "boxes": {
+    "edit_rate": {
+      "x": 1337.953125,
+      "y": 316.921875,
+      "width": 43.046875,
+      "height": 22.84375
+    }
+  },
+  "errors": [],
+  "t0_offset": -0.019
+}

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ExpenseDesk.Tests/ExpenseDesk.Tests.csproj" />
+  <Project Path="ExpenseDesk/ExpenseDesk.csproj" />
+</Solution>

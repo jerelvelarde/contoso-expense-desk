@@ -1,0 +1,36 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        { "type": "Column", "width": "stretch", "items": [{ "type": "TextBlock", "text": "Hotel in ${city} · ${purpose}", "weight": "Bolder", "size": "Medium", "wrap": true }] },
+        { "type": "Column", "width": "auto", "verticalContentAlignment": "Center", "items": [{ "type": "TextBlock", "text": "${statusLabel}", "color": "${statusColor}", "weight": "Bolder", "size": "Small" }] }
+      ]
+    },
+    {
+      "type": "FactSet",
+      "spacing": "Medium",
+      "facts": [
+        { "title": "Dates", "value": "${dates} · ${nights} nights" },
+        { "title": "Rate", "value": "${nightlyRate} a night" },
+        { "title": "Total", "value": "${total}" },
+        { "title": "Policy", "value": "${policySummary}" }
+      ]
+    },
+    {
+      "type": "Container",
+      "$when": "${learnedRuleId != ''}",
+      "style": "accent",
+      "spacing": "Medium",
+      "items": [
+        { "type": "TextBlock", "text": "Learned rule ${learnedRuleId}", "weight": "Bolder", "size": "Small" },
+        { "type": "TextBlock", "text": "${learnedRuleTitle}", "wrap": true, "size": "Small" }
+      ]
+    },
+    { "type": "TextBlock", "text": "${nextStep}", "wrap": true, "isSubtle": true, "spacing": "Medium" }
+  ],
+  "actions": [{ "type": "Action.OpenUrl", "title": "View in Expense Desk", "url": "${deskUrl}" }]
+}
